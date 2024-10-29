@@ -2,20 +2,16 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String path = "conjuntos/aleatorio/aleatorio_10000.csv"; 
+        String path = "conjuntos/decrescente/decrescente_100.csv"; 
         int index = 0;
 
         List<String[]> dados = BubbleSort.lerCsv(path);
 
-        if(dados != null && !dados.isEmpty()){
-
-            BubbleSort.bubbleSort(dados, index);
-            
-            BubbleSort.printBubbleSort(dados);
-
-        } else {
-            System.out.println("dados nao encontrados");
-        }
+        BubbleSort bs = new BubbleSort(path, index);
+        bs.rodar();
+        InsertionSort is = new InsertionSort(path, index);
+        is.rodar();
+        
 
     }
 }

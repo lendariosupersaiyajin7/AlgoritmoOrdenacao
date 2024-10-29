@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BubbleSort {
-
+public class InsertionSort {
     private List<String[]> dados;
     private int index;
 
-    public BubbleSort(String path, int index){
+    public InsertionSort(String path, int index){
         this.index = index;
         this.dados = lerCsv(path);
     }
@@ -30,34 +29,27 @@ public class BubbleSort {
     }
 
     public void organizar() {
-        int n = dados.size();
-        boolean trocado;
+        for(int i  = 1; i < dados.size(); i++){
+            String[] chave = dados.get(i);
+            int j = i - 1;
 
-        do {
-            trocado = false;
-
-            for(int i = 0; i < n - 1; i++){
-                if(Integer.parseInt(dados.get(i)[index]) > Integer.parseInt(dados.get(i+1)[index])){
-                    String temp[] = dados.get(i);
-                    dados.set(i, dados.get(i+1));
-                    dados.set(i+1, temp);
-                    trocado = true;
-                }
+            while(j >= 0 && Integer.parseInt(dados.get(j)[index]) > Integer.parseInt(dados.get(j+1)[index])){
+                dados.set(j + 1, dados.get(j));
+                j--;                
             }
-            n--;
-        } while(trocado);
+        }
     }
 
-    public static void printBubbleSort(List<String[]> dados) {
-        for(String[] linha : dados){
+    public static void printInsertionSort(List<String[]> dados) {
+        for (String[] linha : dados) {
             System.out.println(String.join(", ", linha));
         }
     }
 
     public void rodar() {
         organizar();
-        System.out.println("dados organizados:");
-        printBubbleSort(dados);
+        System.out.println("dados organizados: ");
+        printInsertionSort(dados);
     }
     
 }
