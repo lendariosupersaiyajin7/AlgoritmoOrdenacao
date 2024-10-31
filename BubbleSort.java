@@ -1,63 +1,24 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class BubbleSort extends Sort {
 
-public class BubbleSort {
-
-    private List<String[]> dados;
-    private int index;
-
-    public BubbleSort(String path, int index){
-        this.index = index;
-        this.dados = lerCsv(path);
+    public BubbleSort(String path, int index) {
+        super(path, index);
     }
 
-    public static List<String[]> lerCsv(String path) {
-    List<String[]> dados = new ArrayList<>();
-    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-        String linha;
-
-           while((linha = br.readLine()) != null){
-            String[] dadosLinha = linha.split(", ");
-            dados.add(dadosLinha);
-        }
-    } catch(IOException e){
-        e.printStackTrace();
-    }
-     return dados;
+    @Override
+    public void swap(int i, int j) {
+        String[] aux = dados.get(i);
+        dados.set(i, dados.get(j));
+        dados.set(j, aux);
     }
 
+    @Override
     public void organizar() {
-        int n = dados.size();
-        boolean trocado;
-
-        do {
-            trocado = false;
-
-            for(int i = 0; i < n - 1; i++){
-                if(Integer.parseInt(dados.get(i)[index]) > Integer.parseInt(dados.get(i+1)[index])){
-                    String temp[] = dados.get(i);
-                    dados.set(i, dados.get(i+1));
-                    dados.set(i+1, temp);
-                    trocado = true;
+        for (int i = 0; i < dados.size(); i++) {
+            for (int j = i + 1; j < dados.size(); j++) {
+                if (Integer.parseInt(dados.get(i)[index]) > Integer.parseInt(dados.get(j)[index])) {
+                    swap(i, j);
                 }
             }
-            n--;
-        } while(trocado);
-    }
-
-    public static void printBubbleSort(List<String[]> dados) {
-        for(String[] linha : dados){
-            System.out.println(String.join(", ", linha));
         }
     }
-
-    public void rodar() {
-        organizar();
-        System.out.println("dados organizados:");
-        printBubbleSort(dados);
-    }
-    
 }
