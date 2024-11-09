@@ -18,7 +18,13 @@ public abstract class Sort {
     public abstract void organizar();
 
     public void rodar() {
+        long inicio = System.nanoTime();
         organizar();
+        long fim = System.nanoTime();
+
+        long metrica = fim - inicio;
+
+        System.out.println("Tempo: " + metrica + " ns (nanosegundos)");
         System.out.println("Dados foram ordenados:");
         for (String[] linha : dados) {
             System.out.println(String.join(", ", linha));
