@@ -23,12 +23,12 @@ public abstract class Sort {
         long fim = System.nanoTime();
 
         long metrica = fim - inicio;
-
-        System.out.println("Tempo: " + metrica + " ns (nanosegundos)");
+  
         System.out.println("Dados foram ordenados:");
         for (String[] linha : dados) {
             System.out.println(String.join(", ", linha));
         }
+        System.out.println("Tempo: " + metrica + "ns (nanosegundos)");
     }
 
     public static List<String[]> lerCsv(String path) {
